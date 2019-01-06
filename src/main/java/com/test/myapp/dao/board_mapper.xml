@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE 
+mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev">
+	<select 
+		id="selectOne" 
+		resultType="com.test.myapp.dto.BoardDTO"
+		parameterType="Integer">
+		select * from tbl_spring_board where bno=#{bno}
+	</select>
+	<insert 
+	    id="insertBoard" 
+	    parameterType="com.test.myapp.dto.BoardDTO">
+		insert into
+		tbl_spring_board(BNO, WRITER, TITLE, CONTENT, REGDATE)
+		values
+		(#{bno},#{writer},#{title},#{content},#{regdate})
+	</insert>
+	
+	<select id="getCount" resultType="Integer">
+		select count(*) from tbl_spring_board
+	</select>
+		
+	<select id="getMaxNum" resultType="Integer">
+		select nvl(max(bno+1),1) from tbl_spring_board
+	</select>
+
+	<select 
+	id="selectAll" 
+	resultType="com.test.myapp.dto.BoardDTO">
+		select * from tbl_spring_board
+	</select>
+	
+	<update id="updateViewcnt" 
+	parameterType="Integer" >
+		update tbl_spring_board
+		set viewcnt = viewcnt + 1 
+		where bno = #{bno}	
+	</update>
+	
+	<!-- 
+	<select id="selectGuestBook" 
+	parameterType="Integer" 
+	resultType="java.util.HashMap">
+		select *
+		from tbl_guest_book
+		where num=#{num}
+	</select>
+	
+	<delete id="deleteGuestBook" 
+	        parameterType="Integer">
+		delete from tbl_guest_book
+		where num = #{num}
+	</delete>
+	
+	<update id="updateGuestBook" 
+	parameterType="java.util.HashMap" >
+		update tbl_guest_book
+		set writer = #{writer}, title = #{title}, contents = #{contents}, reg_date = #{reg_date} 
+		where num = #{num}	
+	</update> -->
+</mapper>
+
+

@@ -3,47 +3,38 @@
 <%@ page import="com.test.myapp.dao.BoardDAO" %>
 <%@ page import="com.test.myapp.dto.BoardDTO" %>
 <%@ page import="java.util.ArrayList" %>
+    
 <%!
 	BoardDAO refBoardDAO = null;
 	BoardDTO refBoardDTO = null;
+	String bno = null;
+	int ibno = 0;
+	int iresult = 0;
 	ArrayList<BoardDTO> refArrayList = null;
 %>
 <%
+	bno = request.getParameter("bno");
+	ibno = Integer.parseInt(bno);
 	refBoardDAO = BoardDAO.getInstance();
-	refArrayList = refBoardDAO.selectAll();
+	iresult = refBoardDAO.updateViewcnt(ibno);
+	
+	refBoardDTO = refBoardDAO.selectTuple(ibno);
 %>
+    
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
 <meta charset="EUC-KR">
-<title>Dasboard</title>
+<title>Insert title here</title>
 <script type="text/javascript">
-	function go_reg_board_func(){
-		document.location.href = "regBoard";
+	function go_main_board_func(){
+		document.location.href = "mainBoard";
 	}
 	
 </script>
-
 </head>
 <body>
-	<h1>mainBoard~</h1>
+<h1>mainBoard~</h1>
 	<table>
 	 <tr>
     <th>NUM</th>
@@ -55,21 +46,14 @@ tr:nth-child(even) {
   </tr>
 	
 	<%
-		int size = refArrayList.size();
-		if(size == 0){
-			out.print("THERE IS NO BOARD");
-		}else{
-			for(int i=0;i<size;i++){
-				refBoardDTO = refArrayList.get(i);
 				int bno = refBoardDTO.getBno();
-				out.print("<tr><td><a href='eachboard?bno="+bno+"'>"+bno);
+				out.print("<tr><td>"+bno);
 				out.print("</td><td>"+refBoardDTO.getWriter());
 				out.print("</td><td>"+refBoardDTO.getTitle());
 				out.print("</td><td>"+refBoardDTO.getContent());
 				out.print("</td><td>"+refBoardDTO.getRegdate());
 				out.print("</td><td>"+refBoardDTO.getViewcnt());
-			}
-		}
+			
 	%>
 	</table>
 	
@@ -77,8 +61,9 @@ tr:nth-child(even) {
 		<table>
 			<tr>
 				<td>
-					<input type="button" value="regist" onclick="go_reg_board_func();">
+					<input type="button" value="mainboard" onclick="go_main_board_func();">
 		</table>
 	</form>
+
 </body>
 </html>

@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="com.test.myapp.dao.BoardDAO" %>
+<%!
+	BoardDAO refBoardDAO = null;
+	int maxNum = 0;
+%>
+<%
+	refBoardDAO = BoardDAO.getInstance();
+	maxNum = refBoardDAO.getMaxNum();
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +24,7 @@
 		<table>
 		<tr>
 				<td> number:</td>
-				<td><input type="number" id="bno" name="bno" value="" readonly
+				<td><input type="number" id="bno" name="bno" value="<%=maxNum%>" readonly
 					required></td>
 			</tr>
 			<tr>
@@ -39,10 +50,15 @@
 			<tr>
 				<td>viewcnt</td>
 				<td><input type="number" id="viewcnt" name="viewcnt" required
-					readonly></td>
+					readonly value="1"></td>
+			</tr>
+			<tr>
+				<td> submit :</td>
+				<td><input type="submit" value="submit"></td>
 			</tr>
 			
 		</table>
+		
 	</form>
 </body>
 </html>

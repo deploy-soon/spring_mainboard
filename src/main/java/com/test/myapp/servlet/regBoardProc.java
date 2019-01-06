@@ -1,4 +1,4 @@
-package com.test.myapp;
+package com.test.myapp.servlet;
 
 import com.test.myapp.dao.*;
 import com.test.myapp.dto.*;
@@ -86,10 +86,8 @@ public class regBoardProc extends HttpServlet{
 			int iResult = refBoardDAO.insert(refBoardDTO);
 			if(iResult == 1) {
 				System.out.println("save new post");
-				response.sendRedirect("mainBoard");
 			}else {
 				System.out.println("fail");
-				response.sendRedirect("regBoard");
 			}
 		}
 	}

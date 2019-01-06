@@ -43,5 +43,9 @@ public class HomeController {
 	public String regBoard(Locale locale, Model model) {
 		return "regBoard";
 	}
+	@RequestMapping(value="/eachboard", method=RequestMethod.GET)
+	public String eachBoard(Locale locale, Model model) {
+		return "eachboard";
+	}
 	
 }
